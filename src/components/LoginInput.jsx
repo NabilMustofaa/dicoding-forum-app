@@ -7,10 +7,10 @@ function LoginInput({ login }) {
   const [password, onPasswordChange] = useInput('');
 
   return (
-    <form className="login-input">
-      <input type="email" value={email} onChange={onEmailChange} placeholder="Email" />
-      <input type="password" value={password} onChange={onPasswordChange} placeholder="Password" />
-      <button type="button" onClick={() => login({ email, password })}>Login</button>
+    <form className="flex flex-col w-full my-12 gap-4">
+      <input type="email" value={email} onChange={onEmailChange} placeholder="Email" className="h-12 w-full px-4 rounded bg-gray-200 text-gray-500" />
+      <input type="password" value={password} onChange={onPasswordChange} placeholder="Password" className="h-12 w-full px-4 rounded bg-gray-200 text-gray-500" />
+      <button type="button" onClick={() => login({ email, password })} className="h-12 w-full px-4 rounded bg-orange-500 font-semibold text-white">Login</button>
     </form>
   );
 }

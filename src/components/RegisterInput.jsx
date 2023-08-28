@@ -8,11 +8,11 @@ function RegisterInput({ register }) {
   const [password, onPasswordChange] = useInput('');
 
   return (
-    <form className="register-input">
-      <input type="text" value={name} onChange={onNameChange} placeholder="Name" />
-      <input type="email" value={email} onChange={onEmailChange} placeholder="Email" />
-      <input type="password" value={password} onChange={onPasswordChange} placeholder="Password" />
-      <button type="button" onClick={() => register({ name, email, password })}>Register</button>
+    <form className="flex flex-col w-full my-12 gap-4">
+      <input type="text" value={name} onChange={onNameChange} placeholder="Name" className="h-12 w-full px-4 rounded bg-gray-200 text-gray-500" />
+      <input type="email" value={email} onChange={onEmailChange} placeholder="Email" className="h-12 w-full px-4 rounded bg-gray-200 text-gray-500" />
+      <input type="password" value={password} onChange={onPasswordChange} placeholder="Password" className="h-12 w-full px-4 rounded bg-gray-200 text-gray-500" />
+      <button type="button" onClick={() => register({ name, email, password })} className="h-12 w-full px-4 rounded bg-orange-500 font-semibold text-white">Register</button>
     </form>
   );
 }

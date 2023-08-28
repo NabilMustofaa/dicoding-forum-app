@@ -3,7 +3,7 @@
  */
 
 import { ActionType } from './action';
- 
+
 function isPreloadReducer(isPreload = true, action = {}) {
   switch (action.type) {
     case ActionType.SET_IS_PRELOAD:
@@ -12,5 +12,5 @@ function isPreloadReducer(isPreload = true, action = {}) {
       return isPreload;
   }
 }
- 
+
 export default isPreloadReducer;

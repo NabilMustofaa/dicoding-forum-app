@@ -35,7 +35,8 @@ function App() {
   if (authUser === null) {
     return (
       <>
-        <Loading />
+        <Loading className="fixed top-50 left-0 w-screen h-screen z-10" />
+        <Navigation signOut={onSignOut} />
         <main>
           <Routes>
             <Route path="/*" element={<LoginPage />} />
@@ -48,7 +49,7 @@ function App() {
 
   return (
     <>
-      <Loading />
+      <Loading className="fixed top-50 left-0 w-screen h-screen z-10" />
       <div className="app-container">
         <header>
           <Navigation authUser={authUser} signOut={onSignOut} />
@@ -56,7 +57,7 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/talks/:id" element={<DetailPage />} />
+            <Route path="/thread/:id" element={<DetailPage />} />
           </Routes>
         </main>
       </div>

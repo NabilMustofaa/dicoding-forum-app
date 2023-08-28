@@ -30,7 +30,6 @@ function unsetAuthUserActionCreator() {
 
 function asyncSetAuthUser({ email, password }) {
   return async (dispatch) => {
-    console.log('loading');
     dispatch(showLoading());
     try {
       const token = await api.login({ email, password });

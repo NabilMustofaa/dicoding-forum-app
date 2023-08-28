@@ -29,7 +29,6 @@ function asyncPreloadProcess() {
       // end preload process
       dispatch(setIsPreloadActionCreator(false));
     }
-
     dispatch(hideLoading());
   };
 }

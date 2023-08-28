@@ -267,7 +267,7 @@ const api = (() => {
     }
   }
 
-  async function toggleNeutralVoteComment(id) {
+  async function toggleNeutralComment(id) {
     const response = await fetchWithAuth(`${BASE_URL}/comments/${id}/neutral-vote`, {
       method: 'POST',
       headers: {
@@ -316,7 +316,7 @@ const api = (() => {
     toggleNeutralVoteThread,
     toggleUpvoteComment,
     toggleDownvoteComment,
-    toggleNeutralVoteComment,
+    toggleNeutralComment,
     getLeaderboards,
   };
 })();

@@ -4,16 +4,18 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint ./src --ext .jsx --ext .js"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
+    "html-react-parser": "^4.2.1",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.8.0",
+    "react-icons": "^4.10.1",
     "react-redux": "^8.1.2",
     "react-redux-loading-bar": "^5.0.4",
     "react-router-dom": "^6.10.0"

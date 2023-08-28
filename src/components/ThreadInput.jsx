@@ -1,35 +1,47 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import useInput from '../hooks/useInput';
 
 function ThreadInput({ addThread }) {
-  const [title, onTitleChange] = useInput('');
+  const [title, setTitle] = useState('');
   const [body, setText] = useState('');
-  const [category, onCategoryChange] = useInput('');
+  const [category, setCategory] = useState('');
 
   function addthread() {
     if (body.trim()) {
       addThread({ title, body, category });
       setText('');
+      setTitle('');
+      setCategory('');
     }
   }
 
   function handleTextChange({ target }) {
-    if (target.value.length <= 320) {
-      setText(target.value);
-    }
+    setText(target.value);
+  }
+
+  function onTitleChange({ target }) {
+    setTitle(target.value);
+  }
+
+  function onCategoryChange({ target }) {
+    setCategory(target.value);
   }
 
   return (
-    <div className="flex flex-col">
-      <input type="text" value={title} onChange={onTitleChange} placeholder="Title" className="border border-gray-400 rounded-md p-2" />
-      <textarea type="body" placeholder="What are you thinking?" value={body} onChange={handleTextChange} className="border border-gray-400 rounded-md p-2 bg-transparent" />
+    <div className="flex flex-col px-6 py-4 bg-white rounded-md shadow-md gap-2 mt-4">
+      <input type="text" value={title} onChange={onTitleChange} placeholder="Title" className="h-12 w-full px-4 rounded bg-gray-100 text-gray-500 shadow-sm" />
+      <textarea type="body" placeholder="What are you thinking?" value={body} onChange={handleTextChange} className=" h-32 w-full px-4 py-2 rounded bg-gray-100 text-gray-500" />
       <p className=" flex justify-end -mt-6 -z-10 mr-4">
         <strong>{body.length}</strong>
         /320
       </p>
-      <input type="text" value={category} onChange={onCategoryChange} placeholder="Category" className="border border-gray-400 rounded-md p-2" />
-      <button type="submit" onClick={addthread} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Post</button>  
+      <select value={category} onChange={onCategoryChange} className="h-12 w-full px-4 rounded bg-gray-100 text-gray-500 shadow-sm">
+        <option value="" disabled>Category</option>
+        <option value="general">General</option>
+        <option value="technology">Technology</option>
+        <option value="entertainment">Entertainment</option>
+      </select>
+      <button type="submit" onClick={addthread} className="h-12 w-full px-4 rounded bg-orange-500 font-semibold text-white">Post</button>
     </div>
   );
 }

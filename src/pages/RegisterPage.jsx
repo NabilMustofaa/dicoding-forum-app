@@ -1,6 +1,5 @@
 import React from 'react';
-import { IoEarthOutline } from 'react-icons/io5';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import RegisterInput from '../components/RegisterInput';
 import { asyncRegisterUser } from '../states/users/action';
@@ -14,18 +13,20 @@ function RegisterPage() {
     navigate('/');
   };
   return (
-    <section className="register-page">
-      <header className="register-page__hero">
-        <h1><IoEarthOutline /></h1>
+    <section className="flex">
+      <header className=" w-2/3 bg-white flex justify-center items-center">
+        <img src="" alt="" srcSet="src\assets\login.jpg" className="w-full h-full object-cover" />
       </header>
-      <article className="register-page__main">
-        <h2>Create your account</h2>
+      <article className=" w-1/3 flex flex-col justify-center items-center px-12 bg-gray-50">
+        <h2 className=" text-lg">
+          <strong className=" text-3xl"> Join Our Community!</strong>
+          <br />
+          <br />
+          Get more features and priviliges by joining to the most helpful community
+        </h2>
+
         <RegisterInput register={onRegister} />
-        <p>
-          Already have an account?
-          {' '}
-          <Link to="/">Login</Link>
-        </p>
+
       </article>
     </section>
   );

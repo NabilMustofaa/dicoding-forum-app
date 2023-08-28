@@ -1,91 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FaRegHeart, FaHeart } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import { postedAt } from '../utils';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import parse from 'html-react-parser';
 
-function TalkItem({
-  id, text, createdAt, likes, user, authUser, like,
+import postedAt from '../utils';
+
+function ThreadItem({
+  id, title, body, user, category,
 }) {
-  const navigate = useNavigate();
-  const isTalkLiked = likes.includes(authUser);
-
-  const onLikeClick = (event) => {
-    event.stopPropagation();
-    like(id);
-  };
-
-  const onTalkClick = () => {
-    navigate(`/talks/${id}`);
-  };
-
-  const onTalkPress = (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      navigate(`/talks/${id}`);
-    }
-  };
-
   return (
-    <div role="button" tabIndex={0} className="talk-item" onClick={onTalkClick} onKeyDown={onTalkPress}>
-      <div className="talk-item__user-photo">
-        <img src={user.photo} alt={user} />
+    <div className="flex flex-col px-6 py-4 bg-white rounded-md shadow-md gap-2 mt-4">
+      <div className="flex items-center">
+        <img src={user.avatar} alt="avatar" className="w-12 h-12 rounded-full" />
+        <div className="flex flex-col ml-2">
+          <span className="text-md font-semibold">{user.name}</span>
+          <span className="text-sm">{postedAt(id)}</span>
+        </div>
       </div>
-      <div className="talk-item__detail">
-        <header>
-          <div className="talk-item__user-info">
-            <p className="talk-item__user-name">{user.name}</p>
-            <p className="talk-item__user-id">
-              @
-              {user.id}
-            </p>
-          </div>
-          <p className="talk-item__created-at">{postedAt(createdAt)}</p>
-        </header>
-        <article>
-          <p className="talk-item__text">{text}</p>
-        </article>
-        {
-          like && (
-            <div className="talk-item__likes">
-              <p>
-                <button type="button" aria-label="like" onClick={onLikeClick}>
-                  { isTalkLiked ? <FaHeart style={{ color: 'red' }} /> : <FaRegHeart />}
-                </button>
-                {' '}
-                {likes.length}
-              </p>
-            </div>
-          )
-        }
+      <div className="flex justify-between">
+        <h2 className="text-2xl font-bold">{title}</h2>
+      </div>
+      <div className="flex justify-between">
+        <span className="text">{parse(body)}</span>
+      </div>
+      <div className="flex justify-start">
+        <span className="bg-gray-200 rounded-md px-4 py-2 text-sm">{category}</span>
       </div>
     </div>
   );
 }
 
-const userShape = {
+ThreadItem.propTypes = {
   id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  photo: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  category: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    avatar: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
-const talkItemShape = {
-  id: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
-  createdAt: PropTypes.string.isRequired,
-  likes: PropTypes.arrayOf(PropTypes.string).isRequired,
-  authUser: PropTypes.string.isRequired,
-  user: PropTypes.shape(userShape).isRequired,
-};
-
-TalkItem.propTypes = {
-  ...talkItemShape,
-  like: PropTypes.func,
-};
-
-TalkItem.defaultProps = {
-  like: null,
-};
-
-export { talkItemShape };
-
-export default TalkItem;
+export default ThreadItem;
